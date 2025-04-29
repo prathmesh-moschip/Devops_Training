@@ -1,0 +1,388 @@
+Date: 29 April 2025
+Name: Prathmesh Patil
+Task: Linux commands pratice
+
+
+Linux commands:
+
+1. ifconfig
+	This command displays network interfaces and IP addresses.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ ifconfig
+	
+	enp2s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.1.5  netmask 255.255.254.0  broadcast 172.17.1.255
+        inet6 fe80::93cc:44b9:f230:2048  prefixlen 64  scopeid 0x20<link>
+        ether 30:9c:23:e0:7a:51  txqueuelen 1000  (Ethernet)
+        RX packets 681342  bytes 318613076 (318.6 MB)
+        RX errors 0  dropped 2826  overruns 0  frame 0
+        TX packets 175131  bytes 33431624 (33.4 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+	lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host> 
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 123920  bytes 346338520 (346.3 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 123920  bytes 346338520 (346.3 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+2. ip a
+	This command shows the IP address details.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ ip a
+	
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    	link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    	inet 127.0.0.1/8 scope host lo
+       	valid_lft forever preferred_lft forever
+    	inet6 ::1/128 scope host 
+       	valid_lft forever preferred_lft forever
+	2: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    	link/ether 30:9c:23:e0:7a:51 brd ff:ff:ff:ff:ff:ff
+    	inet 172.17.1.5/23 brd 172.17.1.255 scope global dynamic noprefixroute enp2s0
+       	valid_lft 22886sec preferred_lft 22886sec
+    	inet6 fe80::93cc:44b9:f230:2048/64 scope link noprefixroute 
+       	valid_lft forever preferred_lft forever
+
+
+3. ping <host>
+	Check the network connectivity with the remote host.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ ping localhost
+	
+	PING localhost (127.0.0.1) 56(84) bytes of data.
+	64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.030 ms
+	64 bytes from localhost (127.0.0.1): icmp_seq=2 ttl=64 time=0.036 ms
+	64 bytes from localhost (127.0.0.1): icmp_seq=3 ttl=64 time=0.014 ms
+	64 bytes from localhost (127.0.0.1): icmp_seq=4 ttl=64 time=0.024 ms
+	64 bytes from localhost (127.0.0.1): icmp_seq=5 ttl=64 time=0.025 ms
+	64 bytes from localhost (127.0.0.1): icmp_seq=6 ttl=64 time=0.040 ms
+	64 bytes from localhost (127.0.0.1): icmp_seq=7 ttl=64 time=0.041 ms
+	
+	
+4. netstat -tulnp 
+	View active connections and listening ports.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ netstat -tulnp
+	
+	(Not all processes could be identified, non-owned process info
+ 	will not be shown, you would have to be root to see it all.)
+	Active Internet connections (only servers)
+	Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+	tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      -                   
+	tcp        0      0 127.0.0.1:46829         0.0.0.0:*               LISTEN      11127/arduino-ide   
+	tcp        0      0 127.0.0.1:42655         0.0.0.0:*               LISTEN      11157/arduino-cli   
+	tcp        0      0 127.0.0.1:60000         0.0.0.0:*               LISTEN      15656/arduino-ide   
+	tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+	tcp6       0      0 :::43395                :::*                    LISTEN      11127/arduino-ide   
+	tcp6       0      0 :::36369                :::*                    LISTEN      11127/arduino-ide   
+	tcp6       0      0 :::44941                :::*                    LISTEN      11127/arduino-ide   
+	tcp6       0      0 :::41189                :::*                    LISTEN      11127/arduino-ide   
+	tcp6       0      0 :::41049                :::*                    LISTEN      11127/arduino-ide   
+	tcp6       0      0 :::46093                :::*                    LISTEN      11127/arduino-ide   
+	tcp6       0      0 ::1:631                 :::*                    LISTEN      -                   
+	tcp6       0      0 :::34743                :::*                    LISTEN      11127/arduino-ide   
+	udp        0      0 0.0.0.0:52869           0.0.0.0:*                           -                   
+	udp        0      0 127.0.0.53:53           0.0.0.0:*                           -                   
+	udp        0      0 0.0.0.0:5353            0.0.0.0:*                           -                   
+	udp6       0      0 :::38952                :::*                                -                   
+	udp6       0      0 :::5353                 :::*   
+	
+	
+5. ss -tulnp 
+	A modern alternative to netstat.
+	
+prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ ss -tulnp
+	
+Netid   State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port  Process                                                                         
+udp     UNCONN   0        0                0.0.0.0:52869          0.0.0.0:*                                                                                     
+udp     UNCONN   0        0          127.0.0.53%lo:53             0.0.0.0:*                                                                                     
+udp     UNCONN   0        0                0.0.0.0:5353           0.0.0.0:*                                                                                     
+udp     UNCONN   0        0                   [::]:38952             [::]:*                                                                                     
+udp     UNCONN   0        0                   [::]:5353              [::]:*                                                                                     
+tcp     LISTEN   0        128            127.0.0.1:631            0.0.0.0:*                                                                                     
+tcp     LISTEN   0        511            127.0.0.1:46829          0.0.0.0:*      users:(("arduino-ide",pid=11127,fd=37))                                        
+tcp     LISTEN   0        4096           127.0.0.1:42655          0.0.0.0:*      users:(("arduino-cli",pid=11157,fd=3))                                         
+tcp     LISTEN   0        511            127.0.0.1:60000          0.0.0.0:*      users:(("arduino-ide",pid=15656,fd=32))                                        
+tcp     LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*                                                                                     
+tcp     LISTEN   0        511                    *:43395                *:*      users:(("arduino-ide",pid=11127,fd=83))                                        
+tcp     LISTEN   0        511                    *:36369                *:*      users:(("arduino-ide",pid=11127,fd=79))                                        
+tcp     LISTEN   0        511                    *:44941                *:*      users:(("arduino-ide",pid=11127,fd=52))                                        
+tcp     LISTEN   0        511                    *:41189                *:*      users:(("arduino-ide",pid=11127,fd=77))                                        
+tcp     LISTEN   0        511                    *:41049                *:*      users:(("arduino-ide",pid=11127,fd=55))                                        
+tcp     LISTEN   0        511                    *:46093                *:*      users:(("arduino-ide",pid=11127,fd=81))                                        
+tcp     LISTEN   0        128                [::1]:631               [::]:*                                                                                     
+tcp     LISTEN   0        511                    *:34743                *:*      users:(("arduino-ide",pid=11127,fd=36))           
+
+
+6. nslookup <domain>  
+	The nslookup command is a tool used to query Domain Name System (DNS) servers for information about domain names or IP addresses. It can be used to find the IP address associated with a domain name, or to determine which domain name is associated with an IP address.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ nslookup www.google.com
+	Server:		127.0.0.53
+	Address:	127.0.0.53#53
+
+	Non-authoritative answer:
+	Name:	www.google.com
+	Address: 142.250.182.228
+	Name:	www.google.com
+	Address: 2404:6800:4009:80f::2004
+
+
+7. dig <domain>
+	The dig command in Linux is a powerful tool for querying Domain Name System (DNS) servers. It's used to find IP addresses associated with domain names, as well as other DNS records like MX, NS, and TXT records. The command can also be used to diagnose DNS problems and understand the DNS resolution process. 
+	Basic Usage:
+
+	 dig domain.com:
+	 	This command queries the DNS server for the IP address associated with domain.com. 
+
+	dig @server domain.com:
+	This command queries a specific DNS server (specified by its IP address) for the IP address of domain.com. 
+	dig MX domain.com:
+	This command queries for the MX (Mail Exchange) records for domain.com, which are used for identifying mail servers. 
+	dig NS domain.com:
+	This command queries for the NS (Name Server) records for domain.com, which are the authoritative DNS servers for the domain. 
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ dig google.com
+
+	; <<>> DiG 9.18.30-0ubuntu0.22.04.2-Ubuntu <<>> google.com
+	;; global options: +cmd
+	;; Got answer:
+	;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 25476
+	;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+	;; OPT PSEUDOSECTION:
+	; EDNS: version: 0, flags:; udp: 65494
+	;; QUESTION SECTION:
+	;google.com.			IN	A
+
+	;; ANSWER SECTION:
+	google.com.		16	IN	A	142.250.192.46
+
+	;; Query time: 8 msec
+	;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+	;; WHEN: Tue Apr 29 15:17:55 IST 2025
+	;; MSG SIZE  rcvd: 55
+
+
+8. traceroute <host>
+	The traceroute <host> command, is used to trace the route a packet takes to reach a destination host or IP address. It does this by sending packets with increasing Time-to-Live (TTL) values and observing the responses from intermediate routers. This allows you to see the sequence of network hops along the path.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ traceroute google.com
+	
+	traceroute to google.com (142.250.192.78), 30 hops max, 60 byte packets
+	 1  _gateway (172.17.1.1)  0.642 ms  0.532 ms  0.538 ms
+	 2  abts-mum-dynamic-255.63.169.122.airtelbroadband.in (122.169.63.255)  40.161 ms  9.252 ms  8.945 ms
+	 3  125.18.48.121 (125.18.48.121)  8.518 ms dsl-ncr-dynamic-093.88.16.125.airtelbroadband.in (125.16.88.93)  8.659 ms 125.18.48.121 (125.18.48.121)  9.235 ms
+	 4  116.119.106.216 (116.119.106.216)  39.655 ms * *
+	 5  * * *
+	 6  * * *
+	 7  142.250.228.50 (142.250.228.50)  9.788 ms 142.250.228.48 (142.250.228.48)  11.125 ms 216.239.54.84 (216.239.54.84)  10.028 ms
+	 8  142.251.77.68 (142.251.77.68)  10.861 ms 192.178.111.60 (192.178.111.60)  8.742 ms 142.251.77.68 (142.251.77.68)  12.529 ms
+	 9  bom12s16-in-f14.1e100.net (142.250.192.78)  10.361 ms  8.424 ms  11.336 ms
+	 
+	
+9. wget <url>
+	Wget is the non-interactive network downloader which is used to download files from the server even when the user has not logged on to the system and it can work in the background without hindering the current process. 
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ wget https://www.google.com/
+	
+	--2025-04-29 15:26:39--  https://www.google.com/
+	Resolving www.google.com (www.google.com)... 142.251.220.36, 2404:6800:4009:80b::2004
+	Connecting to www.google.com (www.google.com)|142.251.220.36|:443... connected.
+	HTTP request sent, awaiting response... 200 OK
+	Length: unspecified [text/html]
+	Saving to: ‘index.html’
+
+	index.html              [ <=>                ]  18.76K  --.-KB/s    in 0.02s   
+
+	2025-04-29 15:26:39 (764 KB/s) - ‘index.html’ saved [19207]
+
+
+10. curl <url>
+	curl is a command-line utility for transferring data to or from a server, employing a range of internet protocols such as HTTP, HTTPS, FTP, SCP, and SFTP.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ curl https://example.com
+
+
+11. stat <file>
+	‘stat’ serves as a versatile utility that fetches and displays data about files and directories. From determining file types to monitoring file system usage, ‘stat’ helps users gain insights into various file attributes which are crucial for system management and file handling operations.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ stat Linux_commands.txt 
+	
+	  File: Linux_commands.txt
+	  Size: 12207     	Blocks: 24         IO Block: 4096   regular file
+	Device: 802h/2050d	Inode: 1835086     Links: 1
+	Access: (0664/-rw-rw-r--)  Uid: ( 1001/  prathmesh)   Gid: ( 1001/  prathmesh)
+	Access: 2025-04-29 15:29:34.873009988 +0530
+	Modify: 2025-04-29 15:29:34.886010133 +0530
+	Change: 2025-04-29 15:29:34.890010178 +0530
+	Birth: 2025-04-29 15:29:34.873009988 +0530
+	
+
+12. ls -l <file>
+	This command is used to view the file permissions.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ ls -l Linux_commands.txt 
+	
+	-rw-rw-r-- 1 prathmesh prathmesh 12988 Apr 29 15:36 Linux_commands.txt
+
+
+13. getfacl <file>
+	getfacl displays the comment header, base ACL (access control list) entries, and extended ACL entries, if there are any, for each file that is specified. It also resolves symbolic links. 
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ getfacl Linux_commands.txt 
+	
+	# file: Linux_commands.txt
+	# owner: prathmesh
+	# group: prathmesh
+	user::rw-
+	group::rw-
+	other::r--
+
+
+14. chmod <mode> <file>
+	The chmod command modifies the read, write, and execute permissions of specified files and the search permissions of specified directories. 
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ chmod 646 Linux_commands.txt
+	
+		This will sets read-write (rw) for the owner and read (r) for others.
+		
+	
+
+15. chown <user> <file>
+	The chown command changes the owner of the file or directory specified by the File or Directory parameter to the user specified by the Owner parameter. 
+	
+	chown newuser myfile.txt
+		
+16. chgrp <group> <file>
+	The `chgrp` command in Linux is used to change the group ownership of a file or directory.
+	
+	chgrp newgroup myfile.txt
+	
+	If you need to change the group for all files inside a directory, use:
+		chgrp -R newgroup /path/to/directory
+
+	
+17. umask <mode> 
+	The umask command in Linux sets default permissions for new files and directories. 
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ umask
+	0002
+	
+	umask value is 0002, which means:
+	Files: Default permission (666) - umask (002) → 664 (rw-rw-r--)
+    	Directories: Default permission (777) - umask (002) → 775 (rwxrwxr-x)
+
+
+18. df -h 
+	The df -h command is used to check disk space usage in a human-readable format.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ df -h
+	Filesystem      Size  Used Avail Use% Mounted on
+	tmpfs           788M  2.0M  786M   1% /run
+	/dev/sda2       439G   44G  373G  11% /
+	tmpfs           3.9G  2.5M  3.9G   1% /dev/shm
+	tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+	efivarfs        256K   33K  219K  14% /sys/firmware/efi/efivars
+	/dev/sda1       511M  6.1M  505M   2% /boot/efi
+	tmpfs           788M  1.7M  787M   1% /run/user/1001
+
+
+19. du -sh <dir> 
+	The du -sh <dir> command is used to display the total size of a directory in a human-readable format.	
+	
+	prathmesh@prathmesh-pc:~/Devops$ du -sh Linux_Commands
+	24K	Linux_Commands
+	
+	
+20. kill PID
+	The kill command in Linux is used to send signals to running processes, with the primary purpose of terminating them. It can be used by process ID (PID) or by process name. By default, kill sends the SIGTERM signal, which allows the process to gracefully terminate. 
+
+	prathmesh@prathmesh-pc:~/Devops$ kill -9 26484
+
+
+21. pwd
+	In Linux, the pwd command, which stands for "print working directory," displays the full path of the current directory. It's a fundamental command for navigating and understanding your location within the file system. The output of pwd is simply the absolute path of the current directory, such as /home/user/documents.
+	
+	prathmesh@prathmesh-pc:~/Devops$ pwd
+	/home/prathmesh/Devops
+
+22. ls 
+	The ls command in Linux is used to list the contents of a directory, displaying files and subdirectories. 
+	
+		
+	Common Options:
+
+	 -l: Long listing format, providing detailed information like permissions, size, modification date, etc. 
+	-a: Lists all files, including hidden ones (those starting with a "."). 
+	-h: Uses a human-readable format for file sizes (e.g., KB, MB, GB). 
+	-r: Lists files in reverse order. 
+	-s: Displays the size of each file in blocks. 
+
+		
+23. mv
+	This command is used to rename a file.
+	
+	Syntax : mv old_file.txt new_file.txt
+	
+
+24. cp
+	The cp command in Linux is used to copy files and directories. It's the primary tool for duplicating files and directories in the command line. 
+	
+	Syntax :     cp file1.txt file2.txt
+
+
+25. grep 
+	grep command Grep command in Unix/Linux is the short form of 'global search for the regular expression'. The grep command is a filter that is used to search for lines matching a specified pattern and print the matching lines to standard output.
+
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ grep "prathmesh" a.txt
+	Hello, I am prathmesh
+
+
+26. rm 
+	The rm command in Linux is used to remove files and directories.
+	
+	syntax: rm <filename>
+	
+27. cat
+	Displays the content of provided file
+	
+	Syntax: cat <filename>
+	
+28. touch
+	This command creates a file
+	
+	Syntax: touch <filename>
+	
+29. mkdir
+	This command creates a directory.
+	
+	Syntax: mkdir <directory_name>
+	
+	
+30. cd 
+	Changes the current working directory.
+
+	Syntax: cd <directory_name>
+	
+	cd . : This will not change the directory. It refers to the current directory.
+	cd .. : This will navigate to parent directory.
+	
+31. ps
+	Displays information about running processes.
+	
+
+32. man
+	The man command in Linux displays the user manual (man page) for a specific command or topic. It provides detailed information about the command, including its name, syntax, options, and examples. 
+	
+	
+uname
+	This command displays the system information.
+	
+	prathmesh@prathmesh-pc:~/Devops/Linux_Commands$ uname
+	Linux	
+
